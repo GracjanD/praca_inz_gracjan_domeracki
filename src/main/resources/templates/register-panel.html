@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Zarządzanie projektami</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" th:href="@{/css/auth-style.css}">
+    </head>
+    <body>
+        <span id="title">Zarządzanie projektami</span>
+        <div id="auth-box">
+            Rejestracja
+            <form id="auth-form" action="#" th:action="@{/save}" th:object="${user}" method="POST">
+                <p class="auth-label">E-mail:</p>
+                <input type="text" class="auth-input" th:field="*{email}" required>
+
+                <p th:if="${#fields.hasErrors('email')}"
+                      th:errors="*{email}" class="error"></p>
+
+                <p class="auth-label">Nazwa użytkownika:</p>
+                <input type="text" class="auth-input" th:field="*{username}" required><br>
+
+                <p th:if="${#fields.hasErrors('username')}"
+                      th:errors="*{username}" class="error"></p>
+
+                <p class="auth-label">Imię:</p>
+                <input type="text" class="auth-input" th:field="*{firstName}" required><br>
+
+                <p th:if="${#fields.hasErrors('firstName')}"
+                      th:errors="*{firstName}" class="error"></p>
+
+                <p class="auth-label">Nazwisko:</p>
+                <input type="text" class="auth-input" th:field="*{lastName}" required><br>
+
+                <p th:if="${#fields.hasErrors('lastName')}"
+                      th:errors="*{lastName}" class="error"></p>
+
+                <p class="auth-label">Hasło*:</p>
+                <input type="password" class="auth-input" th:field="*{password}" required><br>
+
+                <p th:if="${#fields.hasErrors('password')}"
+                      th:errors="*{password}" class="error"></p>
+
+                <p th:if="${param.error}" class="error">
+                    Użytkownik z taką nazwą użytkownika lub e-mail już istnieje.
+                </p>
+
+                <p class="auth-label" th:unless="${#fields.hasErrors('password')}">
+                    * Hasło musi posiadać co najmniej 8 znaków, w tym małą i dużą literę, cyfrę i znak specjalny.
+                </p><br>
+
+                <input type="submit" class="auth-submit" value="Zarejestruj się"><br>
+            </form>
+            <span style="font-size: 16px;">Posiadasz już konto? <a th:href="@{/login}" class="link">Zaloguj się</a></span>
+        </div>
+    </body>
+</html>

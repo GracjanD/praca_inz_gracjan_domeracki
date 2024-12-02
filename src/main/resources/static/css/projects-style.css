@@ -1,0 +1,359 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&display=swap');
+
+body {
+    background-color: rgb(43, 42, 42);
+    margin: 0 auto;
+    font-family: "Baloo Paaji 2", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+#title {
+    font-size: 40px;
+    color: white;
+}
+
+
+
+#container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+#category-box {
+    border-radius: 18px;
+    background-color: rgb(26, 26, 26);
+    font-size: 18px;
+    color:rgb(117, 117, 117); 
+    padding: 20px 50px 20px 50px ;
+    margin-left: 10px;
+    width: 100px;
+    text-align: left;
+    
+}
+
+.category-label {
+    color:rgb(117, 117, 117); 
+    text-decoration-line: none;
+}
+
+.category-label:hover {
+    text-decoration-line: underline;
+}
+
+#content-box {
+    border-radius: 18px;
+    background-color: rgb(26, 26, 26);
+    font-size: 18px;
+    color: white;
+    padding: 50px;
+    margin: 0px 10px 0px 10px;
+
+    width: 100%;
+    min-height: 500px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.project-box {
+    width: 90%;
+    height: 100%;
+    
+    
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.task-description {
+    background-color: rgb(43, 42, 42);
+    padding: 20px 20px 5px 20px;
+
+    width: 100%;
+    height: 100%;
+}
+
+.project-settings {
+    background-color: rgb(43, 42, 42);
+    padding: 20px 20px 5px 20px;
+    
+    margin-left: 5px;
+    
+    text-align: center;
+    align-items: center;
+    font-size: 30px;
+
+    width: 100px;
+    height: 100%;
+}
+
+#project-description {
+    background-color: rgb(43, 42, 42);
+    padding: 20px 20px 5px 20px;
+    height: 100%;
+    width: 100%;
+}
+
+
+
+
+.select-settings {
+    outline: none;
+    border: none;
+    width: 30px;
+
+    background-color: transparent;
+    appearance: none;
+    padding: 10px;
+    font-size: 30px;
+    color:white;
+    cursor: pointer;
+
+    font-family: "Baloo Paaji 2", sans-serif;
+}
+
+.option-settings {
+    background-color: rgb(117, 117, 117);
+    font-size: 16px;
+}
+
+#options-box {
+    background-color: rgb(43, 42, 42);
+    width: 100%;
+
+    padding: 20px;
+
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+
+.project-title {
+    color: white;
+    text-decoration-line: none;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.project-title:hover {
+    text-decoration-line: underline;
+}
+
+.options {
+    font-family: "Baloo Paaji 2", sans-serif;
+    
+}
+
+#search-submit {
+    border: none;
+    background-color: rgb(128, 158, 46);
+    font-size: 18px;
+    color: white;
+    font-family: "Baloo Paaji 2", sans-serif;
+    height: 40px;
+    width: 80px;
+    padding: 4px;
+}
+
+#search-submit:hover {
+    background-color: rgb(84, 104, 30);
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+.completed-task {
+    background-color: rgba(152, 243, 6, 0.6); 
+    height: 20px; 
+    float:left;
+}
+
+.in-progress-task {
+    background-color: rgba(243, 219, 6, 0.6); 
+    height: 20px;
+    float:left;
+}
+
+.to-check-task {
+    background-color: rgba(243, 148, 6, 0.6); 
+    height: 20px; 
+    float:left;
+}
+
+.progress-bar {
+    width: 275px; 
+    border: 10px inset rgba(255, 255, 255, 0.315);
+}
+
+
+
+
+
+
+
+.low-priority {
+    color: yellow; 
+    font-size: 15px; 
+    margin-left: 20px;
+}
+
+.medium-priority {
+    color: orange; 
+    font-size: 15px; 
+    margin-left: 20px;
+}
+
+.high-priority {
+    color: red; 
+    font-size: 15px; 
+    margin-left: 20px;
+}
+
+
+.category-and-date {
+    color: rgb(143, 143, 143); 
+    font-size: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#header-box {
+    border-radius: 18px;
+    background-color: rgb(26, 26, 26);
+    font-size: 18px;
+    color: white;
+    padding: 20px;
+    margin: 10px;
+
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+
+    align-items:center;
+    text-align: center;
+
+}
+
+#logout-submit {
+    border: none;
+    background-color: rgb(158, 46, 46);
+    font-size: 18px;
+    color: white;
+    font-family: "Baloo Paaji 2", sans-serif;
+    height: 40px;
+    width: 160px;
+    padding: 4px;
+}
+
+#logout-submit:hover {
+    background-color: rgb(104, 30, 30);
+    cursor: pointer;
+}
+
+.join-submit {
+    border: none;
+    background-color: rgb(128, 158, 46);
+    font-size: 18px;
+    color: white;
+    font-family: "Baloo Paaji 2", sans-serif;
+    height: 40px;
+    width: 80px;
+    padding: 4px;
+}
+
+.join-submit:hover {
+    background-color: rgb(84, 104, 30);
+    cursor: pointer;
+}
+
+.delete-submit {
+    border: none;
+    background-color: rgb(158, 46, 46);
+    font-size: 18px;
+    color: white;
+    font-family: "Baloo Paaji 2", sans-serif;
+    height: 40px;
+    width: 80px;
+    padding: 4px;
+}
+
+.delete-submit:hover {
+    background-color: rgb(104, 30, 30);
+    cursor: pointer;
+}
+
+.project-invite {
+    background-color: rgb(26, 26, 26); 
+    display:flex; 
+    justify-content: space-between; 
+    min-width: 30%; 
+    align-items: center; 
+    padding: 10px; 
+    margin: 10px;
+    float:left;
+}
+
+.whose-task {
+    background-color: rgb(61, 61, 61); 
+    height: 100%; 
+    width: 100%;  
+    padding-left: 20px;
+}
+
+.link {
+    color: rgb(128, 178, 46);
+}
+
+.link:visited {
+    color: rgb(128, 178, 46);
+}
+
+.task-title {
+    color: white;
+    text-decoration-line: none;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.task-title:hover {
+    text-decoration-line: underline;
+}

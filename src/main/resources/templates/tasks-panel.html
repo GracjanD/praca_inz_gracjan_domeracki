@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Zarządzanie projektami</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" th:href="@{/css/project-style.css}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+    <body>
+        <div id="header-container">
+            <div id="header-box">
+                <div>
+                    <span id="title">Zarządzanie projektami</span>
+                </div>
+                <div>
+                    <span style="margin-right: 20px;">Zalogowano jako <span th:text="${user.firstName + ' ' + user.lastName}"></span></span>
+                    <form action="#" th:action="@{/logout}" method="POST">
+                        <button type="submit" id="logout-submit">Wyloguj się</button>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+        <div id="container">
+            
+            <div id="category-box">
+                <a th:href="@{/projects}" class="category-label">Projekty</a>
+                <a th:href="@{/tasks}" class="category-label" style="color: white;">Zadania</a>
+                <a th:href="@{/account}" class="category-label">Konto</a>
+            </div>
+            <div id="content-box">
+                <div class="project-box">
+                    <div class="title-and-options" style="background-color: rgb(61, 61, 61);">
+                        <h2>Zadania</h2>
+                    
+                        <div class="options-box" style="background-color: rgb(61, 61, 61);">
+                            <form action="#" th:action="@{/tasks}" method="GET">
+                                
+                                Pokaż: 
+                                <select class="options" name="taskStatus" onchange="this.form.submit()">
+                                    <option th:value="ALL" th:selected="${taskStatus == 'ALL'}">Wszystkie</option>
+                                    <option th:value="IN_PROGRESS" th:selected="${taskStatus == 'IN_PROGRESS'}">W trakcie</option>
+                                    <option th:value="TO_BE_CHECKED" th:selected="${taskStatus == 'TO_BE_CHECKED'}">Do sprawdzenia</option>
+                                    <option th:value="COMPLETED" th:selected="${taskStatus == 'COMPLETED'}">Ukończone</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-box" th:if="${tasks.isEmpty}">
+                    <div class="task-description">
+                        <h1  style="float:left;">Brak zadań.</h1>
+                    </div>
+                </div>
+                <div class="project-box" th:each="task : ${tasks}">
+                    <div class="task-description" th:style="${task.statusString == 'Ukończony' ? 'border-left: 5px inset greenyellow;' :
+                    (task.statusString == 'Do sprawdzenia' ? 'border-left: 5px inset rgb(18, 99, 175);' : '')}">
+
+                        <a th:href="@{/tasks/{taskId}(taskId = ${task.id})}" class="task-title" th:text="${task.title}"></a>
+                        <span th:class="${task.priorityString == 'NISKI' ? 'low-priority' :
+                        (task.priorityString == 'ŚREDNI' ? 'medium-priority' : 'high-priority')}">
+                            <i class="fa-solid fa-fire"></i>
+                            <span th:text="${task.priorityString}"></span> PRIORYTET <span th:if="${task.priorityString == 'WYSOKI'}">⚠️</span>
+                        </span><br>
+                        <span th:text="${task.description}" style="color: rgb(143, 143, 143);"></span><br>
+                    </div>
+                    <div class="task-description" style="float:right;">
+                        <span class="category-and-date">Status:
+                            <span th:text="${task.statusString}"
+                                  th:style="${task.statusString == 'Ukończony' ? 'color: greenyellow;' :
+                                            (task.statusString == 'Do sprawdzenia' ? 'color: rgb(18, 99, 175);' : '')}">
+                            </span>
+                        </span><br>
+                        <span class="category-and-date">Deadline:
+                            <span th:text="${#temporals.format(task.endDate, 'dd.MM.yyyy')}"></span>.
+                            <span th:style="${task.countRemainingDaysToDeadline() == 0 ? 'color: red;' : 'color: white;'}"
+                                  th:text="${'Pozostało: ' + task.countRemainingDaysToDeadline() + ' dni.'}"></span>
+                        </span><br>
+                        <span class="category-and-date">Projekt:
+                            <a th:href="@{/projects/{projectId}(projectId = ${task.project.id})}"
+                               th:text="${task.project.title}" class="task-title" style="font-size: 16px;"></a>
+                        </span><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

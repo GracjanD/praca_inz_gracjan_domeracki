@@ -1,0 +1,483 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@400..800&display=swap');
+
+body {
+    background-color: rgb(43, 42, 42);
+    margin: 0 auto;
+    font-family: "Baloo Paaji 2", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+
+#app-title {
+    font-size: 40px;
+    color: white;
+}
+
+
+
+#container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+#category-box {
+    border-radius: 18px;
+    background-color: rgb(26, 26, 26);
+    font-size: 18px;
+    color:rgb(117, 117, 117); 
+    padding: 20px 50px 20px 50px ;
+    margin-left: 10px;
+    width: 100px;
+    text-align: left;
+    
+}
+
+.category-label {
+    color:rgb(117, 117, 117); 
+    text-decoration-line: none;
+}
+
+.category-label:hover {
+    text-decoration-line: underline;
+}
+
+#content-box {
+    border-radius: 18px;
+    background-color: rgb(26, 26, 26);
+    font-size: 18px;
+    color: white;
+    padding: 50px;
+    margin: 0px 10px 0px 10px;
+
+    width: 100%;
+    min-height: 500px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#content {
+    width: 80%;
+}
+
+.project-box {
+    width: 90%;
+    height: 100%;
+    
+    
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+
+
+.project-settings {
+    background-color: rgb(24, 24, 24);
+    padding: 20px 20px 5px 20px;
+    
+    text-align: center;
+    align-items: center;
+    font-size: 30px;
+
+    width: 50px;
+    float:left;
+}
+
+.project-description-1 {
+    background-color: rgb(43, 42, 42);
+    padding: 20px 20px 5px 20px;
+    height: 100%;
+    width: 100%;
+}
+
+#project-description-2 {
+    background-color: rgb(43, 42, 42);
+    width: 350px;
+    height: 100%;
+    padding: 20px 20px 5px 20px;
+}
+
+
+
+.select-settings {
+    outline: none;
+    border: none;
+    width: 30px;
+
+    background-color: transparent;
+    appearance: none;
+    padding: 10px;
+    font-size: 30px;
+    color:white;
+    cursor: pointer;
+
+    font-family: "Baloo Paaji 2", sans-serif;
+}
+
+.option-settings {
+    background-color: rgb(117, 117, 117);
+    font-size: 16px;
+}
+
+#options-box {
+    background-color: rgb(43, 42, 42);
+    width: 100%;
+
+    display: flex; 
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+
+
+
+.project-title {
+    color:rgb(175, 175, 175); 
+    text-decoration-line: none;
+    font-weight: bold;
+}
+
+.project-title:hover {
+    text-decoration-line: underline;
+}
+
+.options {
+    font-family: "Baloo Paaji 2", sans-serif;
+}
+
+#search-submit {
+    border: none;
+    background-color: rgb(128, 158, 46);
+    font-size: 18px;
+    color: white;
+    font-family: "Baloo Paaji 2", sans-serif;
+    height: 40px;
+    width: 80px;
+    padding: 4px;
+}
+
+#search-submit:hover {
+    background-color: rgb(84, 104, 30);
+    cursor: pointer;
+}
+
+.for-check-submit {
+    border: none;
+    background-color: rgb(18, 99, 175);
+    font-size: 18px;
+    color: white;
+    font-family: "Baloo Paaji 2", sans-serif;
+    height: 40px;
+    width: 100%;
+    padding: 4px;
+}
+
+.for-check-submit:hover {
+    background-color: rgb(14, 82, 145);
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.completed-task {
+    background-color: rgba(152, 243, 6, 0.6); 
+    height: 20px; 
+    float:left;
+}
+
+.in-progress-task {
+    background-color: rgba(243, 219, 6, 0.6); 
+    height: 20px;
+    float:left;
+}
+
+.to-check-task {
+    background-color: rgba(243, 148, 6, 0.6); 
+    height: 20px; 
+    float:left;
+}
+
+.progress-bar {
+    width: 275px; 
+    border: 10px inset rgba(255, 255, 255, 0.315);
+}
+
+
+
+
+
+
+
+.low-priority {
+    color: yellow; 
+    font-size: 15px; 
+    margin-left: 20px;
+}
+
+.medium-priority {
+    color: orange; 
+    font-size: 15px; 
+    margin-left: 20px;
+}
+
+.high-priority {
+    color: red; 
+    font-size: 15px; 
+    margin-left: 20px;
+}
+
+
+.category-and-date {
+    color: rgb(143, 143, 143); 
+    font-size: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#header-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+#header-box {
+    border-radius: 18px;
+    background-color: rgb(26, 26, 26);
+    font-size: 18px;
+    color: white;
+    padding: 20px;
+    margin: 10px;
+
+    width: 100%;
+
+    display: flex;
+    justify-content: space-between;
+
+    align-items:center;
+    text-align: center;
+
+}
+
+#logout-submit {
+    border: none;
+    background-color: rgb(158, 46, 46);
+    font-size: 18px;
+    color: white;
+    font-family: "Baloo Paaji 2", sans-serif;
+    height: 40px;
+    width: 160px;
+    padding: 4px;
+}
+
+#logout-submit:hover {
+    background-color: rgb(104, 30, 30);
+    cursor: pointer;
+}
+
+.report-input {
+    width: 500px;
+    height: 24px;
+    background-color: rgb(26, 26, 26);
+    color: white;
+    font-family: "Baloo Paaji 2", sans-serif;
+    border: none;
+    border-bottom: 2px solid rgb(117, 117, 117);
+    font-size: 18px;
+    padding: 2px;
+}
+
+.report-textarea {
+    width: 500px;
+    height: 300px;
+    background-color: rgb(26, 26, 26);
+    color: white;
+    font-family: "Baloo Paaji 2", sans-serif;
+    border: none;
+    border-bottom: 2px solid rgb(117, 117, 117);
+    font-size: 16px;
+    padding: 2px;
+}
+
+#title-and-options {
+    display: flex; 
+    flex-direction: column; 
+    background-color: rgb(43, 42, 42);
+    width: 100%; 
+    padding: 0px 20px 20px 20px;
+}
+
+.report-box {
+    display:flex;
+    flex-direction: row; 
+    
+    background-color: rgb(24, 24, 24);
+    margin-bottom: 5px;
+}
+
+
+.report-description {
+    background-color: rgb(24, 24, 24);
+    padding: 5px 20px 5px 20px;
+
+    width: 100%;
+    height: 100%;
+    float:left;
+
+    font-size: 16px;
+}
+
+
+
+.comment-text {
+    font-family: "Baloo Paaji 2", sans-serif;
+    border:none; 
+    width: 100%;
+    min-width: 110px;
+
+    background-color: rgb(39, 39, 39);
+    color: white;
+    border-bottom: 2px solid rgb(121, 121, 121);
+    font-size: 16px;
+}
+
+.comment-submit {
+    border: none;
+    background-color: rgb(121, 121, 121);
+    color: white;
+    font-family: "Baloo Paaji 2", sans-serif;
+    height: 40px;
+    width: 120px;
+    padding: 4px;
+}
+
+.comment-submit:hover {
+    background-color: rgb(80, 80, 80);
+    cursor: pointer;
+}
+
+.report-comments {
+    background-color: rgb(39, 39, 39); 
+    width: 100%; 
+    font-size: 15px; 
+    padding-left: 5px;
+}
+
+.delete-comment-submit {
+    color:rgb(39, 39, 39);
+    background-color: rgb(136, 2, 2); 
+    font-size: 12px; 
+    font-weight: bold; 
+    border-radius: 7px; 
+    margin-left: 10px; 
+    width:40px;
+    border: none;
+    padding:3px;
+}
+
+.delete-comment-submit:hover {
+    background-color: rgb(94, 1, 1);
+    cursor: pointer;
+}
+
+#delete-submit {
+    border: none;
+    background-color: rgb(158, 46, 46);
+    font-size: 18px;
+    color: white;
+    font-family: "Baloo Paaji 2", sans-serif;
+    height: 40px;
+    width: 160px;
+    padding: 4px;
+}
+
+#delete-submit:hover {
+    background-color: rgb(104, 30, 30);
+    cursor: pointer;
+}
+
+.edit-submit {
+    border: none;
+    background-color: rgb(128, 158, 46);
+    font-size: 18px;
+    color: white;
+    font-family: "Baloo Paaji 2", sans-serif;
+    height: 40px;
+    width: 160px;
+    padding: 4px;
+}
+
+.edit-submit:hover {
+    background-color: rgb(84, 104, 30);
+    cursor: pointer;
+}
+
+.cancel-submit {
+    border: none;
+    background-color: rgb(158, 46, 46);
+    font-size: 18px;
+    color: white;
+    font-family: "Baloo Paaji 2", sans-serif;
+    height: 40px;
+    width: 160px;
+    padding: 4px;
+}
+
+.cancel-submit:hover {
+    background-color: rgb(104, 30, 30);
+    cursor: pointer;
+}
+
+.user-option-submit {
+    border: none;
+    background-color: rgb(158, 46, 46);
+    font-size: 16px;
+    color: white;
+    font-family: "Baloo Paaji 2", sans-serif;
+    height: 30px;
+    width: 30px;
+}
+
+.user-option-submit:hover {
+    background-color: rgb(104, 30, 30);
+    cursor: pointer;
+}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Zarządzanie projektami</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" th:href="@{/css/project-edit-style.css}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+    <body>
+        <div id="header-container">
+            <div id="header-box">
+                <div>
+                    <span id="title">Zarządzanie projektami</span>
+                </div>
+                <div>
+                    <span style="margin-right: 20px;">Zalogowano jako <span th:text="${user.firstName + ' ' + user.lastName}"></span></span>
+                    <form action="#" th:action="@{/logout}" method="POST">
+                        <button type="submit" id="logout-submit">Wyloguj się</button>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+        <div id="container">
+            
+            <div id="category-box">
+                <a th:href="@{/projects}" class="category-label" style="color: white;">Projekty</a>
+                <a th:href="@{/tasks}" class="category-label">Zadania</a>
+                <a th:href="@{/account}" class="category-label">Konto</a>
+            </div>
+            <div id="content-box">
+
+                <div class="project-box">
+                    <div class="title-and-options">
+                        <h2>Edytuj projekt</h2>
+
+                        <div class="options-box">
+                            <form th:action="@{/projects/{projectId}(projectId = ${project.id})}" method="GET">
+                                <input type="submit" class="cancel-submit" value="Anuluj">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <form action="#" th:action="@{/projects/{projectId}/editProject(projectId = ${project.id})}"
+                      th:method="POST" class="project-box" th:object="${project}">
+
+                    <div class="project-description-1">
+                        <h3 style="margin: 0px;">Tytuł projektu:</h3>
+                        <input type="text" th:field="*{title}" id="data-input-title" required>
+                        <br><br>
+                        <h3 style="margin: 0px;">Opis projektu:</h3>
+                        <textarea id="data-input-description" th:field="*{description}"></textarea>
+                        <br><br>
+                    </div>
+
+                    <div style="min-width: 5px;"></div>
+
+                    <div id="project-description-2">
+                        <i class="fas fa-calendar-check"></i> Rozpoczęcie projektu:
+                        <input type="date" class="data-input" th:field="*{startDate}" required> <br>
+                        <i class="fas fa-calendar-check"></i> Planowane zakończenie projektu:
+                        <input type="date" class="data-input" th:field="*{endDate}" required> <br>
+                        <br>
+                        Czy użytkownicy powinni widzieć zadania innych? <input type="checkbox" th:field="*{taskVisibility}"><br>
+                        <input type="hidden" th:field="*{id}">
+                        <input type="hidden" th:field="*{leader}">
+                        <input type="hidden" th:field="*{status}">
+                        <div th:if="${error != null}">
+                            <span th:text="${error}" style="color: red;"></span><br>
+                        </div>
+                        <br><input type="submit" value="Zapisz zmiany" class="edit-submit">
+                    </div>
+                </form>
+                <div class="project-box">
+                    <div class="project-description-1">
+
+                        <h2>Członkowie projektu</h2>
+                        <div style="width: 100%; float:left;">
+                            <span th:if="${projectUsers.isEmpty}">Nie znaleziono żadnych użytkowników.</span>
+                            <div class="project-invite" th:each="projectUser : ${projectUsers}">
+                                <div>
+                                    <i class="fa fa-user"></i>
+                                    <span style="margin-left:10px;" th:text="${projectUser.formatUserForView()}"></span>
+                                </div>
+                                <div class="user-settings" >
+                                    <form action="#" th:action="@{/projects/{projectId}/updateProjectLeader(projectId = ${project.id})}" method="POST">
+                                        <input type="hidden" th:value="${projectUser.id}" name="userId">
+
+                                        <input type="submit" class="user-option-submit" value="Oddaj lidera"
+                                               onclick="return confirm('Czy napewno chcesz ustanowić tego użytkownika nowym liderem projektu?');"/>
+                                    </form>
+
+                                    <form action="#" th:action="@{/projects/{projectId}/deleteUserFromProject(projectId = ${project.id})}" method="POST">
+                                        <input type="hidden" th:value="${projectUser.id}" name="userId">
+
+                                        <input type="submit" class="user-option-submit" value="Usuń"
+                                               onclick="return confirm('Czy napewno chcesz usunąć tego użytkownika?');">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

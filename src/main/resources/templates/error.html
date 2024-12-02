@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Zarządzanie projektami</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" th:href="@{/css/projects-style.css}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+    <body>
+        <div id="header-container">
+            <div id="header-box">
+                <div>
+                    <span id="title">Zarządzanie projektami</span>
+                </div>
+            </div>
+        </div>
+        <div id="container">
+            <div id="category-box">
+                <a th:href="@{/projects}" class="category-label" style="color: white;">Projekty</a>
+                <a th:href="@{/tasks}" class="category-label">Zadania</a>
+                <a th:href="@{/account}" class="category-label">Konto</a>
+            </div>
+            <div id="content-box">
+                <div class="project-box">
+                    <div id="project-description">
+                        <h1>BŁĄD 404</h1>
+                        <h2>Nie znaleziono strony</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

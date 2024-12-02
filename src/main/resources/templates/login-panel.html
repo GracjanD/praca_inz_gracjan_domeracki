@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Zarządzanie projektami</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" th:href="@{/css/auth-style.css}">
+    </head>
+    <body>
+        <span id="title">Zarządzanie projektami</span>
+        <div id="auth-box">
+            Logowanie
+            <form id="auth-form" action="#" th:action="@{/authenticateTheUser}" method="POST">
+                <p class="auth-label">Nazwa użytkownika:</p>
+                <input type="text" class="auth-input" name="username" required><br>
+
+                <p class="auth-label">Hasło:</p>
+                <input type="password" class="auth-input" name="password" required><br>
+                <span th:if="${param.error}" style="color: red;">Podano nieprawidłowe dane!</span>
+                <input type="submit" class="auth-submit" value="Zaloguj się"><br>
+            </form>
+            <span style="font-size: 16px;">Nie posiadasz konta? <a th:href="@{/register}" class="link">Załóż konto</a></span>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Zarządzanie projektami</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" th:href="@{/css/project-style.css}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    </head>
+    <body>
+        <div id="header-container">
+            <div id="header-box">
+                <div>
+                    <span id="title">Zarządzanie projektami</span>
+                </div>
+                <div>
+                    <span style="margin-right: 20px;">Zalogowano jako <span th:text="${user.firstName + ' ' + user.lastName}"></span></span>
+                    <form action="#" th:action="@{/logout}" method="POST">
+                        <button type="submit" id="logout-submit">Wyloguj się</button>
+                    </form>
+                </div>
+                
+            </div>
+        </div>
+        <div id="container">
+            
+            <div id="category-box">
+                <a th:href="@{/projects}" class="category-label" style="color: white;">Projekty</a>
+                <a th:href="@{/tasks}" class="category-label">Zadania</a>
+                <a th:href="@{/account}" class="category-label">Konto</a>
+            </div>
+            <div id="content-box">
+
+                <div class="project-box" th:if="${project.leader.id == user.id}">
+                    <div class="title-and-options">
+                        <h2>Zaproś do projektu</h2>
+
+                        <div class="options-box">
+                            <form action="#" th:action="@{/invitations/inviteUser}" method="POST" style="display: flex; justify-content: space-between;">
+                                <div id="invite-block">
+                                    <input type="text" class="options" style="border:none; width: 250px; " placeholder="Nazwa użytkownika" name="username">
+                                    <input type="hidden" th:value="${project.id}" name="projectId">
+                                    <input type="submit" class="search-submit" value="Zaproś">
+                                </div>
+                                <span th:if="${param.error1}" class="error-message">Nie znaleziono użytkownika!</span>
+                                <span th:if="${param.error2}" class="error-message">Użytkownik dostał już zaproszenie!</span>
+                                <span th:if="${param.error3}" class="error-message">Użytkownik jest już w projekcie!</span>
+                                <span th:if="${param.success}" class="success-message">Wysłano zaproszenie!</span>
+                            </form>
+                            <div style="display:flex;flex-direction:row;">
+                                <form action="#" th:action="@{/projects/{projectId}/createTask(projectId = ${project.id})}" th:method="GET">
+                                    <input type="submit" value="Stwórz zadanie" class="edit-submit">
+                                </form>
+                                <form action="#" th:action="@{/projects/{projectId}/editProjectPanel(projectId = ${project.id})}" th:method="GET">
+                                    <input type="submit" value="Edytuj projekt" class="edit-submit">
+                                </form>
+
+                                <form action="#" th:action="@{/projects/{projectId}/deleteProject(projectId = ${project.id})}" th:method="POST">
+                                    <input type="submit" value="Usuń projekt" id="delete-submit"
+                                           onclick="return confirm('Czy na pewno chcesz usunąć ten projekt?');">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-box">
+                    <div id="project-description-1">
+                                
+                        <h2 th:text="${project.title}"></h2>
+                        <pre th:text="${project.description}"></pre>
+                        <br><br>
+                        <div style="display: flex; justify-content: space-between;">
+                            <div class="d-flex-flexd-col">
+                                <br>Ogólne zadania:
+                                <div style="height: 100%;">
+                                    <div th:style="'width:' + ${project.percentOfTasksByStatus('COMPLETED')} + '%;'" class="completed-task"></div>
+                                    <div th:style="'width:' + ${project.percentOfTasksByStatus('TO_BE_CHECKED')} + '%;'" class="to-check-task"></div>
+                                    <div class="progress-bar"></div>
+                                </div>
+                                <span>
+                                    <span style="color: rgba(152, 243, 6, 0.6);">● </span>
+                                    <span th:text="${project.getTasksSummary('COMPLETED')}"></span><br>
+                                </span>
+                                <span>
+                                    <span style="color: rgba(18, 99, 175,0.6); ">● </span>
+                                    <span th:text="${project.getTasksSummary('TO_BE_CHECKED')}"></span><br>
+                                </span>
+                                <span>
+                                    <span style="color: rgba(255, 255, 255, 0.315);">● </span>
+                                    <span th:text="${project.getTasksSummary('IN_PROGRESS')}"></span>
+                                </span>
+                            </div>
+                            <div class="d-flex-flexd-col" style="margin-left: 20px;" th:if="${user.id != project.leader.id}">
+                                <br>Twoje zadania:
+                                <div style="height: 100%;">
+                                    <div th:style="'width:' + ${project.percentOfTasksByStatusAndUser('COMPLETED', user)} + '%;'" class="completed-task"></div>
+                                    <div th:style="'width:' + ${project.percentOfTasksByStatusAndUser('TO_BE_CHECKED', user)} + '%;'" class="to-check-task"></div>
+                                    <div class="progress-bar"></div>
+                                </div>
+                                
+                                <span>
+                                    <span style="color: rgba(152, 243, 6, 0.6);">● </span>
+                                    <span th:text="${project.getTasksByUserSummary('COMPLETED', user)}"></span><br>
+                                </span>
+                                <span>
+                                    <span style="color: rgba(18, 99, 175,0.6); ">● </span>
+                                    <span th:text="${project.getTasksByUserSummary('TO_BE_CHECKED', user)}"></span><br>
+                                </span>
+                                <span>
+                                    <span style="color: rgba(255, 255, 255, 0.315);">● </span>
+                                    <span th:text="${project.getTasksByUserSummary('IN_PROGRESS', user)}"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                            
+                    <div style="min-width: 5px;"></div>
+                    <div id="project-description-2">
+                        <i class="fas fa-tasks"></i> Status projektu:
+                        <span th:text="${project.statusString}"></span><br>
+                        <i class="fas fa-calendar-alt"></i> Rozpoczęcie projektu:
+                        <span th:text="${#temporals.format(project.startDate, 'dd.MM.yyyy')}"></span><br>
+                        <i class="fas fa-calendar-check"></i> Planowane zakończenie projektu:
+                        <span th:text="${#temporals.format(project.endDate, 'dd.MM.yyyy')}"></span><br>
+                        <br>
+                        <i class="fas fa-users"></i> Ilość osób:
+                        <span th:text="${project.users.size}"></span><br>
+                        <i class="fas fa-user-tie"></i> Lider projektu:
+                        <span th:text="${project.leader.firstName + ' ' + project.leader.lastName}"></span><br><br>
+
+
+                        <form action="#" th:action="@{/projects/{projectId}/updateProjectStatus/COMPLETED(projectId = ${project.id})}"
+                              th:method="POST" th:if="${(project.leader.id == user.id) && project.statusString != 'Ukończony'}">
+                            <input type="hidden" th:value="${project.id}" name="projectId">
+                            <input type="submit" class="edit-submit" style="width: 100%;" value="Oznacz jako ukończony">
+                        </form>
+
+                        <form action="#" th:action="@{/projects/{projectId}/updateProjectStatus/IN_PROGRESS(projectId = ${project.id})}"
+                              th:method="POST" th:if="${(project.leader.id == user.id) && (project.statusString == 'Ukończony')}">
+                            <input type="hidden" th:value="${project.id}" name="projectId">
+                            <input type="submit" class="edit-submit" style="width: 100%;" value="Cofnij">
+                        </form>
+                        <span th:if="${project.statusString == 'Ukończony'}" style="color:rgb(128, 200, 46);">Projekt został ukończony.</span>
+
+
+                    </div>
+                </div>
+
+                <div class="project-box">
+                    <div class="title-and-options">
+                        <h2>Zadania</h2>
+                    
+                        <div class="options-box">
+                            <form action="#" th:action="@{/projects/{id}(id = ${project.id})}" method="GET">
+                                
+                                Pokaż: 
+                                <select class="options" name="taskStatus" onchange="this.form.submit()">
+                                    <option th:value="ALL" th:selected="${taskStatus == 'ALL'}">Wszystkie</option>
+                                    <option th:value="IN_PROGRESS" th:selected="${taskStatus == 'IN_PROGRESS'}">W trakcie</option>
+                                    <option th:value="TO_BE_CHECKED" th:selected="${taskStatus == 'TO_BE_CHECKED'}">Do sprawdzenia</option>
+                                    <option th:value="COMPLETED" th:selected="${taskStatus == 'COMPLETED'}">Ukończone</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-box" style="padding: 3px;" th:if="${user.id != project.leader.id}">
+                    <div class="whose-task">
+                        <h3>Twoje zadania</h3>
+                    </div>
+                </div>
+
+                <div class="project-box" th:each="userTask : ${userTasks}" th:if="${!project.isLeader(user)}">
+                    <div class="task-description" th:style="${userTask.statusString == 'Ukończony' ? 'border-left: 5px inset greenyellow;' :
+                    (userTask.statusString == 'Do sprawdzenia' ? 'border-left: 5px inset rgb(18, 99, 175);' : '')}">
+
+                        <a th:href="@{/tasks/{taskId}(taskId = ${userTask.id})}" class="task-title" th:text="${userTask.title}"></a>
+                        <span th:class="${userTask.priorityString == 'NISKI' ? 'low-priority' :
+                        (userTask.priorityString == 'ŚREDNI' ? 'medium-priority' : 'high-priority')}">
+                            <i class="fa-solid fa-fire"></i> <span th:text="${userTask.priorityString}"></span> PRIORYTET
+                            <span th:if="${userTask.priorityString == 'WYSOKI'}">⚠️</span>
+                        </span><br>
+                        <span th:text="${userTask.description}" style="color: rgb(143, 143, 143);"></span><br>
+                    </div>
+                    <div class="task-description" style="float:right;">
+                        <span class="category-and-date">Status:
+                            <span th:text="${userTask.statusString}"
+                                  th:style="${userTask.statusString == 'Ukończony' ? 'color: greenyellow;' :
+                                            (userTask.statusString == 'Do sprawdzenia' ? 'color: rgb(18, 99, 175);' : '')}">
+                            </span>
+                        </span><br>
+                        <span class="category-and-date">Deadline:
+                            <span th:text="${#temporals.format(userTask.endDate, 'dd.MM.yyyy')}"></span>.
+                            <span th:style="${userTask.countRemainingDaysToDeadline() == 0 ? 'color: red;' : 'color: white;'} "
+                                  th:text="'Pozostało: ' + ${userTask.countRemainingDaysToDeadline()} + ' dni.'"></span>
+                        </span><br>
+
+                    </div>
+                </div>
+
+                <div class="project-box" style="padding: 3px;" th:if="${project.taskVisibility || (project.isLeader(user))}">
+                    <div class="whose-task">
+                        <h3>Zadania innych osób</h3>
+                    </div>
+                </div>
+
+                <div class="project-box" th:each="otherUserTask : ${otherUsersTasks}"
+                     th:if="${project.taskVisibility || (project.isLeader(user))}">
+                    <div class="task-description" th:style="${otherUserTask.statusString == 'Ukończony' ? 'border-left: 5px inset greenyellow;' :
+                    (otherUserTask.statusString == 'Do sprawdzenia' ? 'border-left: 5px inset rgb(18, 99, 175);' : '')}">
+
+                        <a th:href="@{/tasks/{taskId}(taskId = ${otherUserTask.id})}" class="task-title" th:text="${otherUserTask.title}"></a>
+                        <span th:class="${otherUserTask.priorityString == 'NISKI' ?
+                        'low-priority' : (otherUserTask.priorityString == 'ŚREDNI' ? 'medium-priority' : 'high-priority')}">
+                            <i class="fa-solid fa-fire"></i> <span th:text="${otherUserTask.priorityString}"></span> PRIORYTET
+                            <span th:if="${otherUserTask.priorityString == 'WYSOKI'}">⚠️</span>
+                        </span><br>
+                        <span th:text="${otherUserTask.description}" style="color: rgb(143, 143, 143);"></span><br>
+                    </div>
+                    <div class="task-description" style="float:right;">
+                        <span class="category-and-date">Status:
+                            <span th:text="${otherUserTask.statusString}"
+                                  th:style="${otherUserTask.statusString == 'Ukończony' ? 'color: greenyellow;' :
+                                            (otherUserTask.statusString == 'Do sprawdzenia' ? 'color: rgb(18, 99, 175);' : '')}">
+                            </span>
+                        </span><br>
+                        <span class="category-and-date">Deadline:
+                            <span th:text="${#temporals.format(otherUserTask.endDate, 'dd.MM.yyyy')}"></span>.
+                            <span th:style="${otherUserTask.countRemainingDaysToDeadline() == 0 ? 'color: red;' : 'color: white;'} "
+                                  th:text="${'Pozostało: ' + otherUserTask.countRemainingDaysToDeadline() + ' dni.'}"></span>
+                        </span><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
