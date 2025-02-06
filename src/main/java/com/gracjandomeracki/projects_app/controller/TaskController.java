@@ -193,7 +193,8 @@ public class TaskController {
     }
 
     @GetMapping("/tasks")
-    public String getTasks(@RequestParam(required = false, defaultValue = "ALL") String taskStatus, Model model){
+    public String getTasks(@RequestParam(required = false, defaultValue = "ALL") String taskStatus,
+                           Model model){
         User user = userService.getCurrentUser();
         List<Task> tasks = taskService.findAllByUser(user);
         model.addAttribute("user", user);
@@ -206,7 +207,8 @@ public class TaskController {
         if(taskStatus.equals("ALL")){
             model.addAttribute("tasks", tasks);
         } else {
-            model.addAttribute("tasks", taskService.findByTasksAndTaskStatus(tasks, Status.valueOf(taskStatus)));
+            model.addAttribute("tasks",
+                    taskService.findByTasksAndTaskStatus(tasks, Status.valueOf(taskStatus)));
         }
 
         return "tasks-panel";

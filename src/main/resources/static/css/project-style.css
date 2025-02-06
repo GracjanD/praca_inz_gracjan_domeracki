@@ -360,4 +360,6 @@ body {
 }
 
 .d-flex-flexd-col {
+    display: flex;
+    flex-direction: column;
 }

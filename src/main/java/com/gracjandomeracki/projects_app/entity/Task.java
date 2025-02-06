@@ -31,7 +31,6 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "project_id")
     private Project project;
-
     @ManyToMany
     @JoinTable(
             name = "task_user",
@@ -39,7 +38,6 @@ public class Task {
             inverseJoinColumns = @JoinColumn(name = "user_id")
     )
     private List<User> users;
-
     @OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
     private List<Report> reports;
 
@@ -164,7 +162,7 @@ public class Task {
         return String.join(", ", users);
     }
 
-    public int countRemainingDaysToDeadline(){
+    public long countRemainingDaysToDeadline(){
         LocalDate deadline = endDate;
         LocalDate now = LocalDate.now();
 
@@ -172,7 +170,7 @@ public class Task {
             return 0;
         }
 
-        return (int) ChronoUnit.DAYS.between(now, deadline);
+        return ChronoUnit.DAYS.between(now, deadline);
     }
 
     public String errorIfDateIsInvalidForCreate(){

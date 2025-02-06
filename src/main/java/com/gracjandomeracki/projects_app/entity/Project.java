@@ -156,7 +156,7 @@ public class Project {
         int countOfTasksByStatus = 0;
 
         for(var task : tasks){
-            if(taskStatus.equals(task.getStatusString())){
+            if(taskStatus.equals(task.getStatus().toString())){
                 countOfTasksByStatus++;
             }
         }
@@ -195,7 +195,7 @@ public class Project {
         int countOfTasksByStatus = 0;
 
         for(var task : tasks){
-            if(taskStatus.equals(task.getStatusString()) && task.hasUser(user)){
+            if(taskStatus.equals(task.getStatus().toString()) && task.hasUser(user)){
                 countOfTasksByStatus++;
             }
         }

@@ -49,6 +49,9 @@
                             <div>
                                 E-mail: <span th:text="${user.email}"></span>
                             </div>
+                            <div>
+                                Nazwa użytkownika: <span th:text="${user.username}"></span>
+                            </div>
                             <div th:if="${param.success}">
                                 <span style="color:yellowgreen">Pomyślnie zapisano zmiany</span>
                             </div>

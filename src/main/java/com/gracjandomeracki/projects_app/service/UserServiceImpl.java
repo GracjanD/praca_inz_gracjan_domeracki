@@ -86,7 +86,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public boolean isDataAvailable(User user) {
-        return userRepository.findByEmail(user.getEmail()) == null && userRepository.findByUsername(user.getUsername().trim().toLowerCase()) == null;
+        return userRepository.findByEmail(user.getEmail()) == null &&
+                userRepository.findByUsername(user.getUsername().trim().toLowerCase()) == null;
     }
 
     @Override

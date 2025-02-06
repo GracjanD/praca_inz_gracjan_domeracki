@@ -13,7 +13,9 @@
                     <span id="title">Zarządzanie projektami</span>
                 </div>
                 <div>
-                    <span style="margin-right: 20px;">Zalogowano jako <span th:text="${user.firstName + ' ' + user.lastName}"></span></span>
+                    <span style="margin-right: 20px;">Zalogowano jako
+                        <span th:text="${user.firstName + ' ' + user.lastName}"></span>
+                    </span>
                     <form action="#" th:action="@{/logout}" method="POST">
                         <button type="submit" id="logout-submit">Wyloguj się</button>
                     </form>
@@ -54,8 +56,10 @@
                     <div style="min-width: 5px;"></div>
 
                     <div id="project-description-2">
-                        <i class="fas fa-calendar-check"></i> Rozpoczęcie projektu: <input type="date" class="data-input" th:field="*{startDate}" required> <br>
-                        <i class="fas fa-calendar-check"></i> Planowane zakończenie projektu: <input type="date" class="data-input" th:field="*{endDate}" required> <br>
+                        <i class="fas fa-calendar-check"></i> Rozpoczęcie projektu:
+                        <input type="date" class="data-input" th:field="*{startDate}" required> <br>
+                        <i class="fas fa-calendar-check"></i> Planowane zakończenie projektu:
+                        <input type="date" class="data-input" th:field="*{endDate}" required> <br>
                         <br>
                         Czy użytkownicy powinni widzieć zadania innych? <input type="checkbox" th:field="*{taskVisibility}"><br>
                         <div th:if="${error != null}">
